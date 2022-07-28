@@ -28,7 +28,7 @@ public class UserDto{
     private String password;
     
     
-    @NotEmpty(message="This field cannot be null.")
+    //@NotEmpty(message="This field cannot be null.")
     private String role;
 }
               

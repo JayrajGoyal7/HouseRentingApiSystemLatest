@@ -23,7 +23,7 @@ public class DemoRentingApiApplication implements CommandLineRunner{
 	}
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println(this.passwordEncoder.encode("jayraj@123"));
+		System.out.println(this.passwordEncoder.encode("asdf"));
 	}
 
 }

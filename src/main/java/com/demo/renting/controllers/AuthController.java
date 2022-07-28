@@ -21,7 +21,7 @@ import com.demo.renting.security.JwtAuthResponse;
 import com.demo.renting.security.JwtTokenHelper;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders={"Accept"})
+@CrossOrigin(origins = "http://localhost:4200", maxAge=3600, allowCredentials="true" ,allowedHeaders = "*")
 @RequestMapping("/api/v1/auth/")
 @Validated
 public class AuthController {
@@ -35,6 +35,8 @@ public class AuthController {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+	
+	// token generation with login
 	@PostMapping("/login")
 	public ResponseEntity<JwtAuthResponse> createToken(@RequestBody JwtAuthRequest request
 
@@ -50,6 +52,8 @@ public class AuthController {
 		return new ResponseEntity<JwtAuthResponse>(response, HttpStatus.OK);
 	}
 
+	
+	// authentication of the username and password
 	private void authenticate(String username, String password) throws Exception {
 
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,

@@ -7,7 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +22,7 @@ import com.demo.renting.payloads.UserDto;
 import com.demo.renting.services.UserService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200", maxAge=3600, allowCredentials="true" ,allowedHeaders = "*") 
 @RequestMapping("/api/users")
 public class UserController {
 
@@ -32,6 +33,13 @@ public class UserController {
 	@PostMapping("/")
 	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto)
 	{
+		
+		String roleName = userDto.getRole();
+		if(roleName==null) {
+			userDto.setRole("customer");
+		}
+		
+		
 		UserDto createUSerDto = this.userService.createUser(userDto);
 		return new ResponseEntity<>(createUSerDto, HttpStatus.CREATED);
 	}
@@ -46,7 +54,6 @@ public class UserController {
 	
 	//DELETE - for deleting the user
 	//Only admin can delete the user.
-	@PreAuthorize("hasRole('admin')")
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<ApiResponse> deleteUser(@PathVariable("userId") Integer uid){
 		this.userService.deleteUser(uid);

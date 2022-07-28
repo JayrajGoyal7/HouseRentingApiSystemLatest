@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 //import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.demo.renting.exceptions.*;
@@ -25,6 +26,13 @@ public class UserServiceImpl implements UserService {
 //	@Autowired
 //	private ModelMapper modelMapper;
 
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	
+
+	
+	
 	@Override
 	public UserDto createUser(UserDto userDto) {
 
@@ -85,7 +93,7 @@ public class UserServiceImpl implements UserService {
 //		user.setEmail(userDto.getEmail());
 //		user.setPassword(userDto.getPassword());
 //		user.setRole(userDto.getRole());
-		 return user;
+		return user;
 
 	}
 
@@ -97,7 +105,7 @@ public class UserServiceImpl implements UserService {
 		userDto.setId(user.getId());
 		userDto.setName(user.getName());
 		userDto.setEmail(user.getEmail());
-		userDto.setPassword(user.getPassword());
+		user.setPassword(userDto.getPassword());
 		userDto.setRole(user.getRole());
 		return userDto;
 
