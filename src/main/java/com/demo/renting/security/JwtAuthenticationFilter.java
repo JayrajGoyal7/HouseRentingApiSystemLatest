@@ -85,7 +85,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			
 			
 		}else {
-			System.out.println("Username is null or context holder is not null.");
+			System.out.println("Username is null or context holder is null.");
 		}
 		
 		filterChain.doFilter(request, response);

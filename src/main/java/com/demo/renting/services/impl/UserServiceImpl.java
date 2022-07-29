@@ -29,10 +29,6 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	
-
-	
-	
 	@Override
 	public UserDto createUser(UserDto userDto) {
 
@@ -86,13 +82,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public User dtoToUser(UserDto userDto) {
-		 User user = this.modelMapper.map(userDto, User.class);
-//		User user = new User();
-//		user.setId(userDto.getId());
-//		user.setName(userDto.getName());
-//		user.setEmail(userDto.getEmail());
-//		user.setPassword(userDto.getPassword());
-//		user.setRole(userDto.getRole());
+		 //User user = this.modelMapper.map(userDto, User.class);
+		User user = new User();
+		user.setId(userDto.getId());
+		user.setName(userDto.getName());
+		user.setEmail(userDto.getEmail());
+		//Encoded the password while sending inside the database.
+		String encodedPassword = this.passwordEncoder.encode(userDto.getPassword());
+		user.setPassword(encodedPassword);
+		user.setRole(userDto.getRole());
 		return user;
 
 	}

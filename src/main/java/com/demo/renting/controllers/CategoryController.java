@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.demo.renting.payloads.ApiResponse;
 import com.demo.renting.payloads.CategoryDto;
-import com.demo.renting.payloads.UserDto;
+//import com.demo.renting.payloads.UserDto;
 import com.demo.renting.services.CategoryService;
 
 @RestController
